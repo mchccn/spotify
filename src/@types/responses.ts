@@ -1,3 +1,4 @@
+import { PagingObject } from "./meta/context";
 import { TrackObject } from "./metadata";
 import { AlbumObject, ArtistObject, EpisodeObject, PlaylistObject, ShowObject } from "./objects";
 
@@ -12,21 +13,11 @@ export interface LoginErrorResponse {
     message?: string;
 }
 
-export interface SearchResponseObject<Item> {
-    href: string;
-    items: Item[];
-    limit: number;
-    next: any;
-    offset: number;
-    previous: any;
-    total: number;
-}
-
 export interface SearchResponse {
-    artists?: SearchResponseObject<ArtistObject>;
-    playlists?: SearchResponseObject<PlaylistObject>;
-    albums?: SearchResponseObject<AlbumObject>;
-    tracks?: SearchResponseObject<TrackObject>;
-    shows?: SearchResponseObject<ShowObject>;
-    episodes?: SearchResponseObject<EpisodeObject>;
+    artists?: PagingObject<ArtistObject>;
+    playlists?: PagingObject<PlaylistObject>;
+    albums?: PagingObject<AlbumObject>;
+    tracks?: PagingObject<TrackObject>;
+    shows?: PagingObject<ShowObject>;
+    episodes?: PagingObject<EpisodeObject>;
 }

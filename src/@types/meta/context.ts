@@ -24,3 +24,13 @@ export interface ErrorObject {
     message: string;
     status: number;
 }
+
+export interface PagingObject<Item> {
+    href: string;
+    items: Item[];
+    limit: number;
+    next: string | null;
+    offset: number;
+    previous: string | null;
+    total: number;
+}
