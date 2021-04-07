@@ -1,5 +1,6 @@
-import { AlbumRestrictionObject, CopyrightObject } from "./meta/context";
+import { AlbumRestrictionObject, CopyrightObject, TrackRestrictionObject } from "./meta/context";
 import { ExternalUrlObject, ImageObject } from "./meta/describers";
+import { LinkedTrackObject } from "./metadata";
 import { CountryCode } from "./utils";
 
 export interface SimplifiedAlbumObject {
@@ -43,5 +44,25 @@ export interface SimplifiedShowObject {
     name: string;
     publisher: string;
     type: "show";
+    uri: string;
+}
+
+export interface SimplifiedTrackObject {
+    artists: SimplifiedArtistObject[];
+    available_markets: CountryCode[];
+    disc_number: number;
+    duration_ms: number;
+    explicit: boolean;
+    external_urls: ExternalUrlObject;
+    href: string;
+    id: string;
+    is_local: boolean;
+    is_playable: boolean;
+    linked_from: LinkedTrackObject;
+    name: string;
+    preview_url: string;
+    restrictions: TrackRestrictionObject;
+    track_number: number;
+    type: "track";
     uri: string;
 }

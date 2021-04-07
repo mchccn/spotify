@@ -1,4 +1,5 @@
-import { ArtistObject } from "./objects";
+import { TrackObject } from "./metadata";
+import { AlbumObject, ArtistObject, PlaylistObject, ShowObject } from "./objects";
 
 export interface LoginResponse {
     access_token: string;
@@ -18,4 +19,9 @@ export interface SearchResponseObject<Item> {
 
 export interface SearchResponse {
     artists?: SearchResponseObject<ArtistObject>;
+    playlists?: SearchResponseObject<PlaylistObject>;
+    albums?: SearchResponseObject<AlbumObject>;
+    tracks?: SearchResponseObject<TrackObject>;
+    shows?: SearchResponseObject<ShowObject>;
+    // episodes?:
 }
