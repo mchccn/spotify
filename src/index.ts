@@ -13,7 +13,7 @@ dotenv();
 
     await client.login();
 
-    await client.search("null magma", ["album", "artist", "episode", "playlist", "show", "track"]);
+    const results = await client.search("null magma", ["artist"]);
 })();
 
 export { SpotifyCredentials, SearchType, SearchLimit };

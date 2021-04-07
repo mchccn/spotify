@@ -28,6 +28,14 @@ export type AtoZ =
 
 export type CountryCode = `${AtoZ}${AtoZ}`;
 
+export type InArray<T, X> = T extends readonly [X, ...infer _Rest]
+    ? true
+    : T extends readonly [X]
+    ? true
+    : T extends readonly [infer _, ...infer Rest]
+    ? InArray<Rest, X>
+    : false;
+
 export type Popularity =
     | 0
     | 1
