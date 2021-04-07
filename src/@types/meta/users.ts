@@ -1,3 +1,4 @@
+import { Base } from "../base";
 import { CountryCode } from "../utils";
 import { ExternalUrlObject, FollowersObject, ImageObject } from "./describers";
 
@@ -6,15 +7,12 @@ export interface ExplicitContentSettingsObject {
     filter_locked: boolean;
 }
 
-export interface PublicUserObject {
+export interface PublicUserObject extends Base {
     display_name: string | null;
     external_urls: ExternalUrlObject;
     followers: FollowersObject;
-    href: string;
-    id: string;
     images: ImageObject[];
     type: "user";
-    uri: string;
 }
 
 export interface PrivateUserObject extends PublicUserObject {

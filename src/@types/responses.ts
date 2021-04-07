@@ -1,3 +1,4 @@
+import { SearchType } from "src";
 import { TrackObject } from "./metadata";
 import { AlbumObject, ArtistObject, PlaylistObject, ShowObject } from "./objects";
 
@@ -17,7 +18,7 @@ export interface SearchResponseObject<Item> {
     total: number;
 }
 
-export interface SearchResponse {
+export interface SearchResponse<Types extends [SearchType, ...SearchType[]]> {
     artists?: SearchResponseObject<ArtistObject>;
     playlists?: SearchResponseObject<PlaylistObject>;
     albums?: SearchResponseObject<AlbumObject>;

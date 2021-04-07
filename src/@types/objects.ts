@@ -1,78 +1,46 @@
-import { AlbumRestrictionObject, CopyrightObject } from "./meta/context";
-import { ExternalIdObject, ExternalUrlObject, FollowersObject, ImageObject } from "./meta/describers";
-import { PublicUserObject } from "./meta/users";
-import { PlaylistTrackObject } from "./metadata";
-import { SimplifiedTrackObject } from "./simplified";
-import { CountryCode } from "./utils";
+import { CopyrightObject } from "./meta/context";
+import { ExternalIdObject, FollowersObject, ImageObject } from "./meta/describers";
+import {
+    SimplifiedAlbumObject,
+    SimplifiedArtistObject,
+    SimplifiedEpisodeObject,
+    SimplifiedPlaylistObject,
+    SimplifiedShowObject,
+    SimplifiedTrackObject,
+} from "./simplified";
+import { Popularity } from "./utils";
 
-export interface ArtistObject {
-    external_urls: ExternalUrlObject;
+export interface ArtistObject extends SimplifiedArtistObject {
     followers: FollowersObject;
     genres: string[];
-    href: string;
-    id: string;
     images: ImageObject[];
-    name: string;
     popularity: 0;
-    type: "artist";
-    uri: string;
 }
 
-export interface PlaylistObject {
-    collaborative: boolean;
-    description: string | null;
-    external_urls: ExternalUrlObject;
+export interface PlaylistObject extends SimplifiedPlaylistObject {
     followers: FollowersObject;
-    href: string;
-    id: string;
-    images: ImageObject[];
-    name: string;
-    owner: PublicUserObject;
-    public: boolean | null;
-    snapshot_id: string;
-    tracks: PlaylistTrackObject[];
-    type: "playlist";
-    uri: string;
 }
 
-export interface AlbumObject {
-    album_type: "album" | "single" | "compilation";
+export interface AlbumObject extends SimplifiedAlbumObject {
     artists: ArtistObject[];
-    available_markets: CountryCode[];
     copyrights: CopyrightObject[];
     external_ids: ExternalIdObject;
-    external_urls: ExternalUrlObject;
     genres: string[];
-    href: string;
-    id: string;
-    images: ImageObject[];
     label: string;
-    name: string;
-    popularity: number;
-    release_date: string;
-    release_date_precision: string;
-    restrictions: AlbumRestrictionObject;
+    popularity: Popularity;
     tracks: SimplifiedTrackObject[];
-    type: "album";
-    uri: string;
 }
 
-export interface ShowObject {
-    available_markets: CountryCode[];
-    copyrights: CopyrightObject[];
-    description: string;
-    // episodes
-    // A list of the show’s episodes.	Array[SimplifiedEpisodeObject]
-    explicit: boolean;
-    external_urls: ExternalUrlObject;
-    href: string;
-    id: string;
-    images: ImageObject[];
-    is_externally_hosted: boolean;
-    languages: string[];
-    media_type: string;
-    name: string;
-    publisher: string;
-    type: "show";
-    uri: string;
+export interface ShowObject extends SimplifiedShowObject {
+    episodes: SimplifiedEpisodeObject[];
+}
+
+export interface EpisodeObject extends SimplifiedEpisodeObject {
+    show: SimplifiedShowObject;
+}
+
+export interface TrackObject extends SimplifiedTrackObject {
+    album: SimplifiedAlbumObject;
+    external_ids: ExternalIdObject;
+    popularity: Popularity;
 }

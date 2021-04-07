@@ -1,16 +1,14 @@
+import { Base, NamedBase } from "./base";
 import { ResumePointObject, TrackRestrictionObject } from "./meta/context";
 import { ExternalIdObject, ExternalUrlObject, ImageObject } from "./meta/describers";
 import { PublicUserObject } from "./meta/users";
 import { ArtistObject } from "./objects";
 import { SimplifiedAlbumObject, SimplifiedShowObject } from "./simplified";
-import { CountryCode } from "./utils";
+import { CountryCode, Popularity } from "./utils";
 
-export interface LinkedTrackObject {
+export interface LinkedTrackObject extends Base {
     external_urls: ExternalUrlObject;
-    href: string;
-    id: string;
     type: "track";
-    uri: string;
 }
 
 export interface PlaylistTrackObject {
@@ -20,7 +18,7 @@ export interface PlaylistTrackObject {
     track: TrackObject | EpisodeObject;
 }
 
-export interface TrackObject {
+export interface TrackObject extends NamedBase {
     album: SimplifiedAlbumObject;
     artists: ArtistObject;
     available_markets: CountryCode[];
@@ -29,38 +27,30 @@ export interface TrackObject {
     explicit: boolean;
     external_ids: ExternalIdObject;
     external_urls: ExternalUrlObject;
-    href: string;
-    id: string;
     is_local: boolean;
     is_playable: boolean;
     linked_from: any;
-    name: string;
-    popularity: number;
+    popularity: Popularity;
     preview_url: string;
     restrictions: TrackRestrictionObject;
     track_number: number;
     type: "track";
-    uri: string;
 }
 
-export interface EpisodeObject {
+export interface EpisodeObject extends NamedBase {
     audio_preview_url: string;
     description: string;
     duration_ms: number;
     explicit: boolean;
     external_urls: ExternalUrlObject;
-    href: string;
-    id: string;
     image: ImageObject[];
     is_externally_hosted: boolean;
     is_playable: boolean;
     language: string;
     languages: string[];
-    name: string;
     release_date: string;
     release_date_precision: string;
     resume_point: ResumePointObject;
     show: SimplifiedShowObject;
     type: "episode";
-    uri: string;
 }

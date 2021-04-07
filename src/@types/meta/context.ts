@@ -19,3 +19,8 @@ export interface CopyrightObject {
     text: string;
     type: "C" | "P";
 }
+
+export interface ErrorObject {
+    message: string;
+    status: number;
+}
