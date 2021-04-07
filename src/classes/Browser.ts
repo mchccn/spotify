@@ -1,6 +1,4 @@
 import fetch from "node-fetch";
-import Spotify, { SearchLimit } from "src";
-import { SearchMarket } from "src/@types/search";
 import { ErrorObject } from "../@types/meta/context";
 import {
     BrowseCategoryPlaylistsResponse,
@@ -10,8 +8,10 @@ import {
     BrowseRecommendationGenresResponse,
     BrowseRecommendationsResponse,
 } from "../@types/responses";
+import { SearchLimit, SearchMarket } from "../@types/search";
 import { CountryCode, Locale, OneToOneHundred } from "../@types/utils";
 import { baseURL, logger } from "../constants";
+import Spotify from "../Spotify";
 
 export default class Browser {
     private static readonly baseURL = `${baseURL}/browse`;

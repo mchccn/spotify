@@ -2,7 +2,7 @@ import { NamedBase } from "./base";
 import { AlbumRestrictionObject, CopyrightObject, ResumePointObject, TrackRestrictionObject } from "./meta/context";
 import { ExternalUrlObject, ImageObject } from "./meta/describers";
 import { PublicUserObject } from "./meta/users";
-import { LinkedTrackObject, PlaylistTrackObject } from "./metadata";
+import { LinkedTrackObject, PlaylistTrackObject } from "./objects";
 import { CountryCode } from "./utils";
 
 export interface SimplifiedAlbumObject extends NamedBase {

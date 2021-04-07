@@ -1,6 +1,4 @@
 import { config as dotenv } from "dotenv";
-import { SpotifyCredentials } from "./@types/auth";
-import { SearchLimit, SearchType } from "./@types/search";
 import Spotify from "./Spotify";
 
 dotenv();
@@ -14,6 +12,9 @@ dotenv();
     await client.login();
 })();
 
-export { SpotifyCredentials, SearchType, SearchLimit };
+export * from "./@types/auth";
+export * from "./@types/base";
+export * from "./@types/objects";
+export * from "./@types/search";
 
 export default Spotify;

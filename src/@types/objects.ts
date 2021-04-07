@@ -1,5 +1,7 @@
+import { Base } from "./base";
 import { CopyrightObject, RecommendationSeedObject } from "./meta/context";
-import { ExternalIdObject, FollowersObject, ImageObject } from "./meta/describers";
+import { ExternalIdObject, ExternalUrlObject, FollowersObject, ImageObject } from "./meta/describers";
+import { PublicUserObject } from "./meta/users";
 import {
     SimplifiedAlbumObject,
     SimplifiedArtistObject,
@@ -55,4 +57,16 @@ export interface CategoryObject {
 export interface RecommendationsObject {
     seeds: RecommendationSeedObject[];
     tracks: SimplifiedTrackObject[];
+}
+
+export interface LinkedTrackObject extends Base {
+    external_urls: ExternalUrlObject;
+    type: "track";
+}
+
+export interface PlaylistTrackObject {
+    added_at: string;
+    added_by: PublicUserObject;
+    is_local: boolean;
+    track: TrackObject | EpisodeObject;
 }

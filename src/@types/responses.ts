@@ -1,6 +1,5 @@
 import { PagingObject } from "./meta/context";
-import { TrackObject } from "./metadata";
-import { AlbumObject, ArtistObject, CategoryObject, EpisodeObject, PlaylistObject, RecommendationsObject, ShowObject } from "./objects";
+import { AlbumObject, ArtistObject, CategoryObject, EpisodeObject, PlaylistObject, RecommendationsObject, ShowObject, TrackObject } from "./objects";
 import { SimplifiedAlbumObject, SimplifiedPlaylistObject } from "./simplified";
 import { OptionalMessage } from "./utils";
 
