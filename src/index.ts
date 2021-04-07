@@ -12,8 +12,6 @@ dotenv();
     });
 
     await client.login();
-
-    const results = await client.search("null magma", ["artist"]);
 })();
 
 export { SpotifyCredentials, SearchType, SearchLimit };

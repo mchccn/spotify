@@ -1,4 +1,4 @@
-import { CopyrightObject } from "./meta/context";
+import { CopyrightObject, RecommendationSeedObject } from "./meta/context";
 import { ExternalIdObject, FollowersObject, ImageObject } from "./meta/describers";
 import {
     SimplifiedAlbumObject,
@@ -43,4 +43,16 @@ export interface TrackObject extends SimplifiedTrackObject {
     album: SimplifiedAlbumObject;
     external_ids: ExternalIdObject;
     popularity: Popularity;
+}
+
+export interface CategoryObject {
+    href: string;
+    icons: ImageObject[];
+    id: string;
+    name: string;
+}
+
+export interface RecommendationsObject {
+    seeds: RecommendationSeedObject[];
+    tracks: SimplifiedTrackObject[];
 }

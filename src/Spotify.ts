@@ -1,23 +1,26 @@
-import Logger from "@aeroware/logger";
 import btoa from "btoa";
 import fetch from "node-fetch";
 import { SpotifyCredentials } from "./@types/auth";
 import { ErrorObject } from "./@types/meta/context";
 import { LoginErrorResponse, LoginResponse, SearchResponse } from "./@types/responses";
 import { SearchIncludeExternal, SearchLimit, SearchMarket, SearchOffset, SearchType } from "./@types/search";
+import Browser from "./classes/Browser";
+import { baseURL, logger } from "./constants";
 import { urlencoded } from "./utils";
 
 export default class Spotify {
+    private static readonly baseURL = baseURL;
+
     private credentials: SpotifyCredentials;
     private accessToken?: string;
 
-    private logger = new Logger("spotify");
+    public readonly browse = new Browser(this);
 
-    constructor(credentials: SpotifyCredentials) {
+    public constructor(credentials: SpotifyCredentials) {
         this.credentials = credentials;
     }
 
-    async login() {
+    public async login() {
         const { clientId, clientSecret } = this.credentials;
 
         const data = {
@@ -37,7 +40,7 @@ export default class Spotify {
 
         const json: LoginResponse & LoginErrorResponse = await res.json();
 
-        if (json.error) return this.logger.error(`Error logging in: '${json.error}'`) as undefined;
+        if (json.error) return logger.error(`Error logging in: '${json.error}'`) as undefined;
 
         this.accessToken = json.access_token;
 
@@ -48,7 +51,7 @@ export default class Spotify {
         return json.access_token;
     }
 
-    async search(
+    public async search(
         query: string,
         types: [SearchType, ...SearchType[]],
         options?: {
@@ -58,25 +61,31 @@ export default class Spotify {
             includeExternal?: SearchIncludeExternal;
         }
     ) {
-        if (!this.accessToken) return this.logger.error(`No access token available`) as undefined;
+        if (!this.accessToken) return logger.error(`No access token available`) as undefined;
 
-        const res = await fetch(
-            `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=${[...new Set(types)].toString()}${
-                options?.market ? `&market=${options.market}` : ""
-            }${options?.limit ? `&limit=${options.limit}` : ""}${options?.offset ? `&offset=${options.offset}` : ""}${
-                options?.includeExternal ? `&include_external=${options.includeExternal}` : ""
-            }`,
-            {
-                headers: {
-                    Authorization: `Bearer ${this.accessToken}`,
-                },
-            }
-        );
+        const url = new URL(`${Spotify.baseURL}/search?q=${encodeURIComponent(query)}&type=${[...new Set(types)].toString()}`);
+
+        if (options) {
+            if (options.market) url.searchParams.set("market", options.market);
+            if (options.limit) url.searchParams.set("limit", options.limit.toString());
+            if (options.offset) url.searchParams.set("offset", options.offset.toString());
+            if (options.includeExternal) url.searchParams.set("include_external", options.includeExternal);
+        }
+
+        const res = await fetch(url, {
+            headers: {
+                Authorization: `Bearer ${this.accessToken}`,
+            },
+        });
 
         const json: SearchResponse & ErrorObject = await res.json();
 
-        if (!res.ok) return this.logger.error(`Error searching: ${json.message}`) as undefined;
+        if (!res.ok) return logger.error(`Error searching: ${json.message}`) as undefined;
 
         return json as SearchResponse;
+    }
+
+    public get token() {
+        return this.accessToken;
     }
 }
