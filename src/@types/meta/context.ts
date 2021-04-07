@@ -5,3 +5,13 @@ export interface TrackRestrictionObject {
 export interface AlbumRestrictionObject {
     reason: "market" | "product" | "explicit";
 }
+
+export interface ResumePointObject {
+    fully_played: boolean;
+    resume_position_ms: number;
+}
+
+export interface CopyrightObject {
+    text: string;
+    type: "C" | "P";
+}

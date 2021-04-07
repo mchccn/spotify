@@ -1,4 +1,4 @@
-import { AlbumRestrictionObject } from "./meta/context";
+import { AlbumRestrictionObject, CopyrightObject } from "./meta/context";
 import { ExternalUrlObject, ImageObject } from "./meta/describers";
 import { CountryCode } from "./utils";
 
@@ -25,5 +25,23 @@ export interface SimplifiedArtistObject {
     id: string;
     name: string;
     type: "artist";
+    uri: string;
+}
+
+export interface SimplifiedShowObject {
+    available_markets: CountryCode[];
+    copyrights: CopyrightObject[];
+    description: string;
+    explicit: boolean;
+    external_urls: ExternalUrlObject;
+    href: string;
+    id: string;
+    images: ImageObject[];
+    is_externally_hosted: boolean;
+    languages: string[];
+    media_type: string;
+    name: string;
+    publisher: string;
+    type: "show";
     uri: string;
 }

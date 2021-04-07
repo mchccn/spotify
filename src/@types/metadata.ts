@@ -1,8 +1,8 @@
-import { TrackRestrictionObject } from "./meta/context";
+import { ResumePointObject, TrackRestrictionObject } from "./meta/context";
 import { ExternalIdObject, ExternalUrlObject, ImageObject } from "./meta/describers";
 import { PublicUserObject } from "./meta/users";
 import { ArtistObject } from "./objects";
-import { SimplifiedAlbumObject } from "./simplified";
+import { SimplifiedAlbumObject, SimplifiedShowObject } from "./simplified";
 import { CountryCode } from "./utils";
 
 export interface LinkedTrackObject {
@@ -59,10 +59,8 @@ export interface EpisodeObject {
     name: string;
     release_date: string;
     release_date_precision: string;
-    // resume_point
-    // The user’s most recent position in the episode. Set if the supplied access token is a user token and has the scope user-read-playback-position.	ResumePointObject
-    // show
-    // The show on which the episode belongs.	SimplifiedShowObject
+    resume_point: ResumePointObject;
+    show: SimplifiedShowObject;
     type: "episode";
     uri: string;
 }
