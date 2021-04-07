@@ -11,6 +11,7 @@
     "author": "im-lonely <cursors.dev@gmail.com>",
     "license": "MIT",
     "dependencies": {
+        "@aeroware/logger": "^2.8.0",
         "btoa": "^1.2.1",
         "node-fetch": "^2.6.1"
     },
