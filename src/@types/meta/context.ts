@@ -21,8 +21,10 @@ export interface CopyrightObject {
 }
 
 export interface ErrorObject {
-    message: string;
-    status: number;
+    error: {
+        message: string;
+        status: number;
+    };
 }
 
 export interface PagingObject<Item> {

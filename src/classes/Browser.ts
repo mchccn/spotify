@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import { URL } from "url";
 import { ErrorObject } from "../@types/meta/context";
 import {
     BrowseCategoryPlaylistsResponse,
@@ -7,7 +8,7 @@ import {
     BrowseNewReleasesResponse,
     BrowseRecommendationGenresResponse,
     BrowseRecommendationsResponse,
-} from "../@types/responses";
+} from "../@types/res/browse";
 import { SearchLimit, SearchMarket } from "../@types/search";
 import { CountryCode, Locale, OneToOneHundred } from "../@types/utils";
 import { baseURL, logger } from "../constants";
@@ -115,7 +116,7 @@ export default class Browser {
 
         const json: BrowseCategoryResponse & ErrorObject = await res.json();
 
-        if (!res.ok) return logger.error(`Error fetching category: ${json.message}`) as undefined;
+        if (!res.ok) return logger.error(`Error fetching category: ${json.error.message}`) as undefined;
 
         return json as BrowseCategoryResponse;
     }
@@ -139,9 +140,9 @@ export default class Browser {
 
         const json: BrowseCategoryPlaylistsResponse & ErrorObject = await res.json();
 
-        if (!res.ok) return logger.error(`Error fetching category playlists: ${json.message}`) as undefined;
+        if (!res.ok) return logger.error(`Error fetching category playlists: ${json.error.message}`) as undefined;
 
-        return json as BrowseCategoryPlaylistsResponse;
+        return (json as BrowseCategoryPlaylistsResponse).playlists;
     }
 
     public async recommendations(
@@ -260,7 +261,7 @@ export default class Browser {
 
         const json: BrowseRecommendationsResponse & ErrorObject = await res.json();
 
-        if (!res.ok) return logger.error(`Error fetching recommendations: ${json.message}`) as undefined;
+        if (!res.ok) return logger.error(`Error fetching recommendations: ${json.error.message}`) as undefined;
 
         return json as BrowseRecommendationsResponse;
     }
@@ -278,8 +279,8 @@ export default class Browser {
 
         const json: BrowseRecommendationGenresResponse & ErrorObject = await res.json();
 
-        if (!res.ok) return logger.error(`Error fetching recommendation genres: ${json.message}`) as undefined;
+        if (!res.ok) return logger.error(`Error fetching recommendation genres: ${json.error.message}`) as undefined;
 
-        return json as BrowseRecommendationGenresResponse;
+        return (json as BrowseRecommendationGenresResponse).genres;
     }
 }

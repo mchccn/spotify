@@ -1,9 +1,12 @@
 import btoa from "btoa";
 import fetch from "node-fetch";
+import { URL } from "url";
 import { SpotifyCredentials } from "./@types/auth";
 import { ErrorObject } from "./@types/meta/context";
-import { LoginErrorResponse, LoginResponse, SearchResponse } from "./@types/responses";
+import { LoginErrorResponse, LoginResponse } from "./@types/res/auth";
+import { SearchResponse } from "./@types/res/search";
 import { SearchIncludeExternal, SearchLimit, SearchMarket, SearchOffset, SearchType } from "./@types/search";
+import Artists from "./classes/Artists";
 import Browser from "./classes/Browser";
 import { baseURL, logger } from "./constants";
 import { urlencoded } from "./utils";
@@ -15,6 +18,7 @@ export default class Spotify {
     private accessToken?: string;
 
     public readonly browse = new Browser(this);
+    public readonly artists = new Artists(this);
 
     public constructor(credentials: SpotifyCredentials) {
         this.credentials = credentials;
@@ -80,7 +84,7 @@ export default class Spotify {
 
         const json: SearchResponse & ErrorObject = await res.json();
 
-        if (!res.ok) return logger.error(`Error searching: ${json.message}`) as undefined;
+        if (!res.ok) return logger.error(`Error searching: ${json.error.message}`) as undefined;
 
         return json as SearchResponse;
     }

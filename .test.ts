@@ -1,1 +1,0 @@
-import Spotify, {} from "./src";
