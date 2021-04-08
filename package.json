@@ -1,6 +1,6 @@
 {
     "name": "spotifyx",
-    "version": "1.1.1",
+    "version": "1.69.420",
     "description": "### **Fast-paced and versatile Spotify API wrapper for Node.**",
     "main": "dist/index.js",
     "scripts": {
@@ -13,8 +13,7 @@
     "dependencies": {
         "@aeroware/logger": "^2.8.0",
         "btoa": "^1.2.1",
-        "node-fetch": "^2.6.1",
-        "spotifyx": "^1.0.1"
+        "node-fetch": "^2.6.1"
     },
     "devDependencies": {
         "@types/btoa": "^1.2.3",
