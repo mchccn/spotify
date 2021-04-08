@@ -4,6 +4,7 @@ import { URL } from "url";
 import Albums from "./classes/Albums";
 import Artists from "./classes/Artists";
 import Browser from "./classes/Browser";
+import Episodes from "./classes/Episodes";
 import Tracks from "./classes/Tracks";
 import { baseURL, logger } from "./constants";
 import { SpotifyCredentials } from "./typings/auth";
@@ -23,6 +24,7 @@ export default class Spotify {
     public readonly artists = new Artists(this);
     public readonly albums = new Albums(this);
     public readonly tracks = new Tracks(this);
+    public readonly episodes = new Episodes(this);
 
     public constructor(credentials: SpotifyCredentials) {
         this.credentials = credentials;
