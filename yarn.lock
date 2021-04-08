@@ -768,6 +768,15 @@ source-map@^0.6.0:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
+spotifyx@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/spotifyx/-/spotifyx-1.0.1.tgz#cf6ef4317955a31d7c3fa1e64d41c95f234f1cc7"
+  integrity sha512-f1mHuGh1MSED+gV6Ygh0VxXtWsSHo436SRtxmxj/RHynWvfPpNgdOGxxxWL5Y9SRFbnFMIkqOo4g6jVHhB1vkA==
+  dependencies:
+    "@aeroware/logger" "^2.8.0"
+    btoa "^1.2.1"
+    node-fetch "^2.6.1"
+
 string-width@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-3.1.0.tgz#22767be21b62af1081574306f69ac51b62203961"
