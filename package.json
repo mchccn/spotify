@@ -1,6 +1,6 @@
 {
     "name": "spotifyx",
-    "version": "0.6.9",
+    "version": "0.9.9",
     "description": "",
     "main": "index.js",
     "scripts": {
