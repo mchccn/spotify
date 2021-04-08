@@ -3,7 +3,7 @@ import { URL } from "url";
 import { baseURL, logger } from "../constants";
 import Spotify from "../Spotify";
 import { ErrorObject } from "../typings/meta/context";
-import { ArtistsMultipleArtistsResponse, ArtistsSingleArtistResponse, ArtistsTopTracksResponse } from "../typings/res/artists";
+import { ArtistsAlbumsResponse, ArtistsMultipleArtistsResponse, ArtistsRelatedResponse, ArtistsSingleArtistResponse, ArtistsTopTracksResponse } from "../typings/res/artists";
 import { SearchLimit, SearchMarket } from "../typings/search";
 import { AlbumGroup } from "../typings/utils";
 
@@ -64,6 +64,23 @@ export default class Artists {
         return (json as ArtistsTopTracksResponse).tracks;
     }
 
+    public async related(id: string) {
+        const url = new URL(`${Artists.baseURL}/${id}/related-artists`);
+
+
+        const res = await fetch(url, {
+            headers: {
+                Authorization: `Bearer ${this.client.token}`,
+            },
+        });
+
+        const json: ArtistsRelatedResponse & ErrorObject = await res.json();
+
+        if (!res.ok) return logger.error(`Error fetching related artists: ${json.error.message}`) as undefined;
+
+        return (json as ArtistsRelatedResponse).artists;
+    }
+
     public async albums(id: string, options?: { include?: AlbumGroup[]; market?: SearchMarket; limit: SearchLimit; offset?: number }) {
         const url = new URL(`${Artists.baseURL}/${id}/albums`);
 
@@ -80,10 +97,10 @@ export default class Artists {
             },
         });
 
-        const json: ArtistsTopTracksResponse & ErrorObject = await res.json();
+        const json: ArtistsAlbumsResponse & ErrorObject = await res.json();
 
-        if (!res.ok) return logger.error(`Error fetching top tracks: ${json.error.message}`) as undefined;
+        if (!res.ok) return logger.error(`Error fetching albums: ${json.error.message}`) as undefined;
 
-        return (json as ArtistsTopTracksResponse).tracks;
+        return (json as ArtistsAlbumsResponse).items;
     }
 }

@@ -1,14 +1,16 @@
 import btoa from "btoa";
 import fetch from "node-fetch";
 import { URL } from "url";
+import Albums from "./classes/Albums";
+import Artists from "./classes/Artists";
+import Browser from "./classes/Browser";
+import Tracks from "./classes/Tracks";
+import { baseURL, logger } from "./constants";
 import { SpotifyCredentials } from "./typings/auth";
 import { ErrorObject } from "./typings/meta/context";
 import { LoginErrorResponse, LoginResponse } from "./typings/res/auth";
-import { SearchResponse } from "./typings/res/search";
+import { MarketsResponse, SearchResponse, UsersResponse } from "./typings/res/search";
 import { SearchIncludeExternal, SearchLimit, SearchMarket, SearchOffset, SearchType } from "./typings/search";
-import Artists from "./classes/Artists";
-import Browser from "./classes/Browser";
-import { baseURL, logger } from "./constants";
 import { urlencoded } from "./utils";
 
 export default class Spotify {
@@ -19,6 +21,8 @@ export default class Spotify {
 
     public readonly browse = new Browser(this);
     public readonly artists = new Artists(this);
+    public readonly albums = new Albums(this);
+    public readonly tracks = new Tracks(this);
 
     public constructor(credentials: SpotifyCredentials) {
         this.credentials = credentials;
@@ -87,6 +91,42 @@ export default class Spotify {
         if (!res.ok) return logger.error(`Error searching: ${json.error.message}`) as undefined;
 
         return json as SearchResponse;
+    }
+
+    public async user(id: string) {
+        if (!this.accessToken) return logger.error(`No access token available`) as undefined;
+
+        const url = new URL(`${Spotify.baseURL}/users/${id}`);
+
+        const res = await fetch(url, {
+            headers: {
+                Authorization: `Bearer ${this.accessToken}`,
+            },
+        });
+
+        const json: UsersResponse & ErrorObject = await res.json();
+
+        if (!res.ok) return logger.error(`Error searching: ${json.error.message}`) as undefined;
+
+        return json as UsersResponse;
+    }
+
+    public async markets() {
+        if (!this.accessToken) return logger.error(`No access token available`) as undefined;
+
+        const url = new URL(`${Spotify.baseURL}/markets`);
+
+        const res = await fetch(url, {
+            headers: {
+                Authorization: `Bearer ${this.accessToken}`,
+            },
+        });
+
+        const json: MarketsResponse & ErrorObject = await res.json();
+
+        if (!res.ok) return logger.error(`Error searching: ${json.error.message}`) as undefined;
+
+        return (json as MarketsResponse).markets;
     }
 
     public get token() {
