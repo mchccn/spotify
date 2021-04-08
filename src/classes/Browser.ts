@@ -1,7 +1,10 @@
 import fetch from "node-fetch";
 import { URL } from "url";
+import { baseURL, logger } from "../constants";
+import Spotify from "../Spotify";
 import { ErrorObject } from "../typings/meta/context";
 import {
+    BrowseAllCategoriesResponse,
     BrowseCategoryPlaylistsResponse,
     BrowseCategoryResponse,
     BrowseFeaturedPlaylistsResponse,
@@ -11,8 +14,6 @@ import {
 } from "../typings/res/browse";
 import { SearchLimit, SearchMarket } from "../typings/search";
 import { CountryCode, Locale, OneToOneHundred } from "../typings/utils";
-import { baseURL, logger } from "../constants";
-import Spotify from "../Spotify";
 
 export default class Browser {
     private static readonly baseURL = `${baseURL}/browse`;
@@ -91,11 +92,11 @@ export default class Browser {
             },
         });
 
-        const json: BrowseFeaturedPlaylistsResponse & ErrorObject = await res.json();
+        const json: BrowseAllCategoriesResponse & ErrorObject = await res.json();
 
-        if (!res.ok) return logger.error(`Error fetching all categories: ${json.message}`) as undefined;
+        if (!res.ok) return logger.error(`Error fetching all categories: ${json.error.message}`) as undefined;
 
-        return json as BrowseFeaturedPlaylistsResponse;
+        return json as BrowseAllCategoriesResponse;
     }
 
     public async category(category: string, options?: { country?: CountryCode; locale?: Locale }) {

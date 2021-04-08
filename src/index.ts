@@ -19,3 +19,5 @@ export * from "./typings/simplified";
 export * from "./typings/utils";
 
 export default Spotify;
+
+module.exports = Spotify;
