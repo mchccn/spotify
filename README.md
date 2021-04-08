@@ -476,3 +476,12 @@ const genres = await client.browse.recommendationGenres();
     </details>
 
 </details>
+
+## Future features
+
+-   Include other three authorization flows
+-   Use refresh tokens
+-   Spotify user auth service
+    -   Authorization scopes
+    -   Access to user-related APIs
+    -   Access to other APIs
