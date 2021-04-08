@@ -1,7 +1,4 @@
-import { config as dotenv } from "dotenv";
 import Spotify from "./Spotify";
-
-dotenv();
 
 export * from "./typings/auth";
 export * from "./typings/base";
