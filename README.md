@@ -63,16 +63,13 @@ import Spotify from "spotifyx";
 
 # Documentation
 
-_No JSDoc used because TypeScript provides type annotations._
-
 **Key:**
 
 -   🄲 – Class declaration
 -   🄿 – Property
 -   🄼 – Method
--   🅃 – Typedef
 
-_Note that not all typedefs will be documented as they are straight from Spotify's [documentation](https://developer.spotify.com/documentation/)_
+_Most typedefs are from Spotify's [documentation](https://developer.spotify.com/documentation/)._
 
 <details>
 
@@ -353,7 +350,7 @@ Fetches a category.
 #### **Example:**
 
 ```js
-const categories = await client.browse.category("party");
+const category = await client.browse.category("party");
 ```
 
 ---
@@ -377,7 +374,7 @@ Fetches a category's playlists.
 #### **Example:**
 
 ```js
-const categories = await client.browse.categoryPlaylists("party");
+const playlists = await client.browse.categoryPlaylists("party");
 ```
 
 ---
@@ -427,11 +424,167 @@ const genres = await client.browse.recommendationGenres();
 
 <summary>🄲 Artists</summary>
 
+## 🄲 `Artists`
+
+Wrapper for Spotify's artists API.
+
+_private_
+
+---
+
+## **Methods**
+
+### 🄼 `Artists#get`
+
+Retrieves an artist or multiple artists.
+
+#### **Parameters:**
+
+-   `ids` – Can either be an ID or array of IDs.
+
+#### **Returns:**
+
+_If a single ID is used:_
+
+-   `ArtistsSingleArtistResponse` – The artist retrieved
+
+_If an array of IDs is used:_
+
+-   `ArtistsMultipleArtistsResponse` – The artists retrieved
+
+#### **Example:**
+
+```js
+const artists = await client.artists.get(["a-id", "another-id"]);
+```
+
+---
+
+### 🄼 `Artists#topTracks`
+
+Retrieves an artist's top tracks.
+
+#### **Parameters:**
+
+-   `id` – Artist ID
+
+#### **Returns:**
+
+-   `ArtistsTopTracksResponse` – The artist's top tracks
+
+#### **Example:**
+
+```js
+const topTracks = await client.artists.topTracks("an-id");
+```
+
+---
+
+### 🄼 `Artists#related`
+
+Retrieves an artist's related artists.
+
+#### **Parameters:**
+
+-   `id` – Artist ID
+
+#### **Returns:**
+
+-   `ArtistsRelatedArtistsResponse` – The artist's related artists
+
+#### **Example:**
+
+```js
+const related = await client.artists.related("an-id");
+```
+
+---
+
+### 🄼 `Artists#albums`
+
+Retrieves an artist's albums.
+
+#### **Parameters:**
+
+-   `id` – Artist ID
+
+#### **Returns:**
+
+-   `ArtistsAlbumsResponse` – The artist's albums
+
+#### **Example:**
+
+```js
+const albums = await client.artists.albums("an-id");
+```
+
 </details>
 
 <details>
 
 <summary>🄲 Albums</summary>
+
+## 🄲 `Shows`
+
+Wrapper for Spotify's shows API.
+
+_private_
+
+---
+
+## **Methods**
+
+### 🄼 `Albums#get`
+
+Retrieves an album or multiple albums.
+
+#### **Parameters:**
+
+-   `ids` – Can either be an ID or array of IDs.
+-   `options?` – Fetch options
+    -   `market?` – Country code
+
+#### **Returns:**
+
+_If a single ID is used:_
+
+-   `AlbumsSingleAlbumResponse` – The album retrieved
+
+_If an array of IDs is used:_
+
+-   `AlbumsMultipleAlbumsResponse` – The albums retrieved
+
+#### **Example:**
+
+```js
+const albums = await client.albums.get(["an-id", "another-id"]);
+```
+
+---
+
+### 🄼 `Albums#tracks`
+
+Retrieves an album's tracks.
+
+#### **Parameters:**
+
+-   `id` – The album's ID
+-   `options?` – Fetch options
+    -   `market` – Country code
+    -   `limit` – Fetch limit
+    -   `offset` – Fetch offset
+
+#### **Returns:**
+
+-   `AlbumsTracksResponse` – The album's tracks
+
+#### **Example:**
+
+```js
+const tracks = await client.albums.tracks("an-id");
+```
+
+</details>
 
 </details>
 
@@ -439,11 +592,105 @@ const genres = await client.browse.recommendationGenres();
 
 <summary>🄲 Tracks</summary>
 
+## 🄲 `Tracks`
+
+Wrapper for Spotify's tracks API.
+
+_private_
+
+---
+
+## **Methods**
+
+### 🄼 `Tracks#get`
+
+Retrieves a track or multiple tracks.
+
+#### **Parameters:**
+
+-   `ids` – Can either be an ID or array of IDs.
+-   `options?` – Fetch options
+    -   `market?` – Country code
+
+#### **Returns:**
+
+_If a single ID is used:_
+
+-   `TracksSingleTrackResponse` – The track retrieved
+
+_If an array of IDs is used:_
+
+-   `TracksMultipleTracksResponse` – The tracks retrieved
+
+---
+
+### 🄼 `Tracks#audioFeatures`
+
+Retrieves a track or multiple tracks' audio features.
+
+#### **Parameters:**
+
+-   `ids` – Can either be an ID or array of IDs.
+-   `options?` – Fetch options
+    -   `market?` – Country code
+
+#### **Returns:**
+
+_If a single ID is used:_
+
+-   `TracksSingleTrackAudioFeatureResponse` – The audio feature retrieved
+
+_If an array of IDs is used:_
+
+-   `TracksMultipleTracksAudioFeaturesResponse` – The audio features retrieved
+
+### 🄼 `Tracks#audioAnalysis`
+
+Retrieves a track's audio analysis
+
+#### **Parameters:**
+
+-   `id` – Track ID
+
+#### **Returns:**
+
+-   `AudioAnalysisObject` – The audio analysis
+
 </details>
 
 <details>
 
 <summary>🄲 Episodes</summary>
+
+## 🄲 `Episodes`
+
+Wrapper for Spotify's episodes API.
+
+_private_
+
+---
+
+## **Methods**
+
+### 🄼 `Episodes#get`
+
+Retrieves an episode or multiple episodes.
+
+#### **Parameters:**
+
+-   `ids` – Can either be an ID or array of IDs.
+-   `options?` – Fetch options
+    -   `market?` – Country code
+
+#### **Returns:**
+
+_If a single ID is used:_
+
+-   `EpisodesSingleEpisodeResponse` – The episode retrieved
+
+_If an array of IDs is used:_
+
+-   `EpisodesMultipleEpisodesResponse` – The episodes retrieved
 
 </details>
 
@@ -451,29 +698,61 @@ const genres = await client.browse.recommendationGenres();
 
 <summary>🄲 Shows</summary>
 
-</details>
+## 🄲 `Shows`
 
-<details>
+Wrapper for Spotify's shows API.
 
-<summary>🅃 Typedefs</summary>
+_private_
 
--   <details>
+---
 
-    <summary>🅃 Main</summary>
+## **Methods**
 
-    </details>
+### 🄼 `Shows#get`
 
--   <details>
+Retrieves a show or multiple shows.
 
-    <summary>🅃 Responses</summary>
+#### **Parameters:**
 
-    </details>
+-   `ids` – Can either be an ID or array of IDs.
+-   `options?` – Fetch options
+    -   `market?` – Country code
 
--   <details>
+#### **Returns:**
 
-    <summary>🅃 Metadata</summary>
+_If a single ID is used:_
 
-    </details>
+-   `ShowsSingleShowResponse` – The show retrieved
+
+_If an array of IDs is used:_
+
+-   `ShowsMultipleShowsResponse` – The shows retrieved
+
+#### **Example:**
+
+```js
+const shows = await client.shows.get(["an-id", "another-id"]);
+```
+
+---
+
+### 🄼 `Shows#episodes`
+
+Retrieves a show's episodes.
+
+#### **Parameters:**
+
+-   `id` – The show's ID
+
+#### **Returns:**
+
+-   `ShowsEpisodesResponse` – The episodes retrieved
+
+#### **Example:**
+
+```js
+const episodes = await client.shows.episodes("an-id");
+```
 
 </details>
 
