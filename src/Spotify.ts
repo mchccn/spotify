@@ -1,11 +1,11 @@
 import btoa from "btoa";
 import fetch from "node-fetch";
 import { URL } from "url";
-import { SpotifyCredentials } from "./@types/auth";
-import { ErrorObject } from "./@types/meta/context";
-import { LoginErrorResponse, LoginResponse } from "./@types/res/auth";
-import { SearchResponse } from "./@types/res/search";
-import { SearchIncludeExternal, SearchLimit, SearchMarket, SearchOffset, SearchType } from "./@types/search";
+import { SpotifyCredentials } from "./typings/auth";
+import { ErrorObject } from "./typings/meta/context";
+import { LoginErrorResponse, LoginResponse } from "./typings/res/auth";
+import { SearchResponse } from "./typings/res/search";
+import { SearchIncludeExternal, SearchLimit, SearchMarket, SearchOffset, SearchType } from "./typings/search";
 import Artists from "./classes/Artists";
 import Browser from "./classes/Browser";
 import { baseURL, logger } from "./constants";

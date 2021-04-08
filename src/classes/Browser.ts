@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 import { URL } from "url";
-import { ErrorObject } from "../@types/meta/context";
+import { ErrorObject } from "../typings/meta/context";
 import {
     BrowseCategoryPlaylistsResponse,
     BrowseCategoryResponse,
@@ -8,9 +8,9 @@ import {
     BrowseNewReleasesResponse,
     BrowseRecommendationGenresResponse,
     BrowseRecommendationsResponse,
-} from "../@types/res/browse";
-import { SearchLimit, SearchMarket } from "../@types/search";
-import { CountryCode, Locale, OneToOneHundred } from "../@types/utils";
+} from "../typings/res/browse";
+import { SearchLimit, SearchMarket } from "../typings/search";
+import { CountryCode, Locale, OneToOneHundred } from "../typings/utils";
 import { baseURL, logger } from "../constants";
 import Spotify from "../Spotify";
 

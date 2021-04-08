@@ -354,3 +354,5 @@ export type Locale =
 export interface OptionalMessage {
     message?: string;
 }
+
+export type AlbumGroup = "album" | "single" | "appears_on" | "compilation";

@@ -3,11 +3,11 @@ import { AlbumRestrictionObject, CopyrightObject, ResumePointObject, TrackRestri
 import { ExternalUrlObject, ImageObject } from "./meta/describers";
 import { PublicUserObject } from "./meta/users";
 import { LinkedTrackObject, PlaylistTrackObject } from "./objects";
-import { CountryCode } from "./utils";
+import { AlbumGroup, CountryCode } from "./utils";
 
 export interface SimplifiedAlbumObject extends NamedBase {
-    album_group: "album" | "single" | "compilation" | "appears_on";
-    album_type: "album" | "single" | "compilation";
+    album_group: AlbumGroup;
+    album_type: Exclude<AlbumGroup, "appears_on">;
     artists: SimplifiedArtistObject[];
     available_markets: CountryCode[];
     external_urls: ExternalUrlObject;
